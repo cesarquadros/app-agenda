@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.ListaSalasActivity"></activity>
-        <activity android:name=".ui.InicialActivity" />
+        <activity android:name=".ui.DataAgendaActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

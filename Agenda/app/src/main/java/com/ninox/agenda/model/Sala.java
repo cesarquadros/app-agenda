@@ -38,9 +38,10 @@ public class Sala {
     }
 
     public void inicializar(){
-
-
         salas = new ArrayList<>();
-        salas.add(new Sala("Sala 1", "Uma mesa, duas cadeiras"));
+        salas.add(new Sala("Sala 1", "Uma mesa, uma cadeiras"));
+        salas.add(new Sala("Sala 2", "Uma duas, duas cadeiras"));
+        salas.add(new Sala("Sala 3", "Uma tres, tres cadeiras"));
+        salas.add(new Sala("Sala 4", "Uma quatro, quatro cadeiras"));
     }
 }
