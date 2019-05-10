@@ -1,6 +1,7 @@
 package com.ninox.agenda.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intentVaiProFormulario = new Intent(MainActivity.this, InicialActivity.class);
+                Intent intentVaiProFormulario = new Intent(MainActivity.this, ListaSalasActivity.class);
                 startActivity(intentVaiProFormulario);
                 Toast.makeText(MainActivity.this, "Usuario Logado", Toast.LENGTH_SHORT).show();
             }
