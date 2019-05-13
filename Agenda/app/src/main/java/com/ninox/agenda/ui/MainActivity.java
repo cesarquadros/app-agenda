@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                Intent intentVaiProFormulario = new Intent(MainActivity.this, ListaSalasActivity.class);
+                Intent intentVaiProFormulario = new Intent(MainActivity.this, DataAgendaActivity.class);
                 startActivity(intentVaiProFormulario);
                 Toast.makeText(MainActivity.this, "Usuario Logado", Toast.LENGTH_SHORT).show();
             }

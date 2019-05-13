@@ -1,16 +1,16 @@
 package com.ninox.agenda.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CalendarView;
 import android.widget.TextView;
 
 import com.ninox.agenda.R;
 
 public class DataAgendaActivity extends AppCompatActivity {
-
-    private TextView salaSelecionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,13 +19,24 @@ public class DataAgendaActivity extends AppCompatActivity {
 
         Intent dadosRecebidos = getIntent();
 
-        salaSelecionada = findViewById(R.id.sala_selecionada);
+        final CalendarView calendarView = findViewById(R.id.calendario);
 
-       // String dadosRecebidos.getIntExtra("sala", 1)
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 
-       String sala = dadosRecebidos.getStringExtra("sala");
-       String descricao = dadosRecebidos.getStringExtra("descricao");
+            @Override
+            public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 
-       salaSelecionada.setText(sala);
+                String dia = String.valueOf(dayOfMonth);
+                String mes = String.valueOf(month);
+                String ano = String.valueOf(year);
+
+                String dataString = dia +"/"+ mes +"/"+ ano;
+
+
+                Intent intent = new Intent(DataAgendaActivity.this, ListaSalasActivity.class);
+                intent.putExtra("dataLongMiliseconds",dataString);
+                startActivity(intent);
+            }
+        });
     }
 }

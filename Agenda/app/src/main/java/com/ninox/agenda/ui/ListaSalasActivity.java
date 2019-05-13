@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
 import com.ninox.agenda.model.OnItemClickListener;
 import com.ninox.agenda.model.RVAdapter;
 
+import java.util.Date;
 import java.util.List;
 
 import model.Sala;
@@ -36,6 +38,13 @@ public class ListaSalasActivity extends AppCompatActivity {
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         rv.setLayoutManager(llm);
+
+        TextView textDataSelecionada = findViewById(R.id.data_selecionada);
+
+        Intent intent = getIntent();
+        String dateSelected = intent.getStringExtra("dataLongMiliseconds");
+
+        textDataSelecionada.setText(dateSelected);
 
         rvAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
