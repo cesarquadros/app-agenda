@@ -24,7 +24,7 @@ public class DataAgendaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_agenda);
-        //setTitle("Escolha a data"); ---- Alterar titulo da Activity
+        setTitle("Agendamento - Data"); //---- Alterar titulo da Activity
 
         Intent dadosRecebidos = getIntent();
 
@@ -37,7 +37,7 @@ public class DataAgendaActivity extends AppCompatActivity {
                 view = getDateString(view, year, month, dayOfMonth);
 
                 String dataStringApresentacao = new SimpleDateFormat(FORMATO_DATA_APRESENTACAO).format(new Date(view.getDate()));
-                String dataStringRequisicao = new SimpleDateFormat(FORMATO_DATA_APRESENTACAO).format(new Date(view.getDate()));
+                String dataStringRequisicao = new SimpleDateFormat(FORMATO_DATA_REQUISICAO).format(new Date(view.getDate()));
 
                 Intent intent = new Intent(DataAgendaActivity.this, ListaSalasActivity.class);
                 intent.putExtra("dataApresentacao",dataStringApresentacao);

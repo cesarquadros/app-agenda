@@ -24,6 +24,7 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resumo_agendamento);
+        setTitle("Agendamento - Resumo");
         inicializarComponentes();
         getExtrasIntent();
         setDadosComponents();
@@ -48,6 +49,6 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
     private void setDadosComponents() {
         this.resumoData.setText("Data: " + this.data);
         this.resumoHorario.setText("Horario: " + this.horario);
-        this.resumoSala.setText(this.sala + "-" + descricao);
+        this.resumoSala.setText(this.sala + " - " + descricao);
     }
 }
