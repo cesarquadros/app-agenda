@@ -22,7 +22,6 @@ public class DataAgendaActivity extends AppCompatActivity {
         final CalendarView calendarView = findViewById(R.id.calendario);
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
 

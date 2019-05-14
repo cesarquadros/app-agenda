@@ -1,4 +1,4 @@
-package com.ninox.agenda.model;
+package com.ninox.agenda.ui.recycle;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,16 +10,17 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninox.agenda.R;
+import com.ninox.agenda.ui.onclicklistner.OnItemClickListener;
 
 import java.util.List;
 
-public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalaViewHolder> {
+public class RecycleSalasAdapter extends RecyclerView.Adapter<RecycleSalasAdapter.SalaViewHolder> {
 
     private final List<Sala> salas;
     private final Context context;
     OnItemClickListener onItemClickListener;
 
-    public RVAdapter(List<Sala> salas, Context context){
+    public RecycleSalasAdapter(List<Sala> salas, Context context){
         this.salas = salas;
         this.context = context;
     }
@@ -36,13 +37,13 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.SalaViewHolder> {
 
     @Override
     public SalaViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View viewCriada = LayoutInflater.from(context).inflate(R.layout.item_sala, viewGroup, false);
+        View viewCriada = LayoutInflater.from(this.context).inflate(R.layout.item_sala, viewGroup, false);
         SalaViewHolder svh = new SalaViewHolder(viewCriada);
         return svh;
     }
 
     @Override
-    public void onBindViewHolder(RVAdapter.SalaViewHolder salaViewHolder, int i) {
+    public void onBindViewHolder(RecycleSalasAdapter.SalaViewHolder salaViewHolder, int i) {
 
         Sala s = salas.get(i);
         salaViewHolder.vincula(s);

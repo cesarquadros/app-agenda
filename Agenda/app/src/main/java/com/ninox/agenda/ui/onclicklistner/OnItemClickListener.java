@@ -1,4 +1,4 @@
-package com.ninox.agenda.model;
+package com.ninox.agenda.ui.onclicklistner;
 
 import model.Sala;
 public interface OnItemClickListener {

@@ -44,6 +44,7 @@
         <Button
             android:text="Efetuar login"
             android:id="@+id/btn_login"
+            android:background="#673AB7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
