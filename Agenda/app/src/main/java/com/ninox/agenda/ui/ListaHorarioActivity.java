@@ -40,7 +40,7 @@ public class ListaHorarioActivity extends AppCompatActivity {
         RecycleHorariosAdapter recycleHorariosAdapter = new RecycleHorariosAdapter(horarios, this);
         rv.setAdapter(recycleHorariosAdapter);
 
-        rv.setLayoutManager(new GridLayoutManager(this,3));
+        rv.setLayoutManager(new GridLayoutManager(this,2));
 
     }
 }

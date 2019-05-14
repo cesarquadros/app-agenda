@@ -7,7 +7,7 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         xmlns:tools="http://schemas.android.com/tools"
         android:padding="16dp"
         android:orientation="vertical">
@@ -24,15 +24,15 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_view_horario"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/item_horario"
-            />
+            android:layout_height="450dp"
+            tools:listitem="@layout/item_horario" />
 
         <Button
+            android:layout_marginTop="10dp"
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#673AB7"
+            android:background="#C3A4F8"
             android:text="Alterar data" />
     </LinearLayout>
 </ScrollView>

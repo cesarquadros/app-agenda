@@ -44,9 +44,9 @@ public class ListaSalasActivity extends AppCompatActivity {
         TextView textDataSelecionada = findViewById(R.id.data_selecionada);
 
         Intent intent = getIntent();
-        String dateSelected = intent.getStringExtra("dataLongMiliseconds");
+        String dateSelected = intent.getStringExtra("dataApresentacao");
 
-        textDataSelecionada.setText(dateSelected);
+        textDataSelecionada.setText("Data selecionada: "+ dateSelected);
 
         recycleSalasAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
