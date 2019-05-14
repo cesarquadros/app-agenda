@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/login"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ListaHorarioActivity"></activity>
+        <activity android:name=".ui.ResumoAgendamentoActivity"></activity>
+        <activity android:name=".ui.ListaHorarioActivity" />
         <activity android:name=".ui.ListaSalasActivity" />
         <activity android:name=".ui.DataAgendaActivity" />
         <activity android:name=".ui.MainActivity">

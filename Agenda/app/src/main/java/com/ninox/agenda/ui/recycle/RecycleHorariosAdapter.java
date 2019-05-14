@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninox.agenda.R;
 import com.ninox.agenda.model.Horario;
+import com.ninox.agenda.ui.onclicklistner.OnItemHorarioClickListener;
 
 import java.util.List;
 
@@ -18,12 +19,16 @@ public class RecycleHorariosAdapter extends RecyclerView.Adapter<RecycleHorarios
 
     private final List<Horario> horarios;
     private final Context context;
+    OnItemHorarioClickListener onItemHorarioClickListener;
 
     public RecycleHorariosAdapter(List<Horario> horarios, Context context) {
         this.horarios = horarios;
         this.context = context;
     }
 
+    public void setOnItemHorarioClickListener(OnItemHorarioClickListener onItemHorarioClickListener) {
+        this.onItemHorarioClickListener = onItemHorarioClickListener;
+    }
 
     @Override
     public HorarioViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
@@ -51,6 +56,13 @@ public class RecycleHorariosAdapter extends RecyclerView.Adapter<RecycleHorarios
         public HorarioViewHolder(@NonNull View itemView) {
             super(itemView);
             this.textViewHorario = itemView.findViewById(R.id.horario_hora);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemHorarioClickListener.onItemClick(horario, getAdapterPosition());
+                }
+            });
         }
 
         public void vincula(Horario horario){

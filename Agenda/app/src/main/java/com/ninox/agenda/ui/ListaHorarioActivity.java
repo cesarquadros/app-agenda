@@ -4,16 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ninox.agenda.R;
 import com.ninox.agenda.model.Horario;
+import com.ninox.agenda.ui.onclicklistner.OnItemHorarioClickListener;
 import com.ninox.agenda.ui.recycle.RecycleHorariosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListaHorarioActivity extends AppCompatActivity {
+
+    private String sala;
+    private String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +48,19 @@ public class ListaHorarioActivity extends AppCompatActivity {
 
         rv.setLayoutManager(new GridLayoutManager(this,2));
 
+        recycleHorariosAdapter.setOnItemHorarioClickListener(new OnItemHorarioClickListener() {
+            @Override
+            public void onItemClick(Horario horario, int posicao) {
+
+                Intent intentRecebido = getIntent();
+
+                Intent intentVaiParaResumo = new Intent(ListaHorarioActivity.this, ResumoAgendamentoActivity.class);
+                intentVaiParaResumo.putExtra("data", intentRecebido.getStringExtra("data"));
+                intentVaiParaResumo.putExtra("sala", intentRecebido.getStringExtra("sala"));
+                intentVaiParaResumo.putExtra("descricao", intentRecebido.getStringExtra("descricao"));
+                intentVaiParaResumo.putExtra("horario", horario.getHora());
+                startActivity(intentVaiParaResumo);
+            }
+        });
     }
 }

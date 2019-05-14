@@ -2,7 +2,6 @@ package com.ninox.agenda.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
-import com.ninox.agenda.ui.onclicklistner.OnItemClickListener;
+import com.ninox.agenda.ui.onclicklistner.OnItemSalaClickListener;
 import com.ninox.agenda.ui.recycle.RecycleSalasAdapter;
 
 import java.util.List;
@@ -21,6 +20,8 @@ import java.util.List;
 import model.Sala;
 
 public class ListaSalasActivity extends AppCompatActivity {
+
+    private String dateSelected;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +45,18 @@ public class ListaSalasActivity extends AppCompatActivity {
         TextView textDataSelecionada = findViewById(R.id.data_selecionada);
 
         Intent intent = getIntent();
-        String dateSelected = intent.getStringExtra("dataApresentacao");
+        this.dateSelected = intent.getStringExtra("dataApresentacao");
 
         textDataSelecionada.setText("Data selecionada: "+ dateSelected);
 
-        recycleSalasAdapter.setOnItemClickListener(new OnItemClickListener() {
+        recycleSalasAdapter.setOnItemSalaClickListener(new OnItemSalaClickListener() {
             @Override
             public void onItemClick(Sala sala, int posicao) {
-                Toast.makeText(ListaSalasActivity.this, "Escolhida sala: ", Toast.LENGTH_SHORT).show();
-                Intent intentVaiPraData = new Intent(ListaSalasActivity.this, ListaHorarioActivity.class);
-                intentVaiPraData.putExtra("sala", sala.getNome());
-                intentVaiPraData.putExtra("descricao", sala.getDescricao());
-                startActivity(intentVaiPraData);
+                Intent intentGotToHorario = new Intent(ListaSalasActivity.this, ListaHorarioActivity.class);
+                intentGotToHorario.putExtra("sala", sala.getNome());
+                intentGotToHorario.putExtra("descricao", sala.getDescricao());
+                intentGotToHorario.putExtra("data", dateSelected);
+                startActivity(intentGotToHorario);
             }
         });
     }

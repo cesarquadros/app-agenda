@@ -24,6 +24,7 @@ public class DataAgendaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data_agenda);
+        //setTitle("Escolha a data"); ---- Alterar titulo da Activity
 
         Intent dadosRecebidos = getIntent();
 

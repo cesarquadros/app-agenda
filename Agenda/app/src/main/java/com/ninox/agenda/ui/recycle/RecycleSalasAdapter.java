@@ -10,7 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninox.agenda.R;
-import com.ninox.agenda.ui.onclicklistner.OnItemClickListener;
+import com.ninox.agenda.ui.onclicklistner.OnItemSalaClickListener;
 
 import java.util.List;
 
@@ -18,17 +18,16 @@ public class RecycleSalasAdapter extends RecyclerView.Adapter<RecycleSalasAdapte
 
     private final List<Sala> salas;
     private final Context context;
-    OnItemClickListener onItemClickListener;
+    OnItemSalaClickListener onItemSalaClickListener;
 
     public RecycleSalasAdapter(List<Sala> salas, Context context){
         this.salas = salas;
         this.context = context;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener;
+    public void setOnItemSalaClickListener(OnItemSalaClickListener onItemSalaClickListener){
+        this.onItemSalaClickListener = onItemSalaClickListener;
     }
-
 
     @Override
     public int getItemCount() {
@@ -70,7 +69,7 @@ public class RecycleSalasAdapter extends RecyclerView.Adapter<RecycleSalasAdapte
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    onItemClickListener.onItemClick(sala, getAdapterPosition());
+                    onItemSalaClickListener.onItemClick(sala, getAdapterPosition());
                 }
             });
         }
