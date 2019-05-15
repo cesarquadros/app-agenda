@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,6 +16,7 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
     private TextView resumoSala;
     private TextView resumoHorario;
     private TextView resumoData;
+    private Button btnConfirmarReserva;
 
     private String sala;
     private String horario;
@@ -29,13 +32,22 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
         getExtrasIntent();
         setDadosComponents();
 
-        Toast.makeText(ResumoAgendamentoActivity.this, "Tela de resumo do Agendamento", Toast.LENGTH_LONG).show();
+        this.btnConfirmarReserva.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), DataAgendaActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("EXIT", true);
+                startActivity(intent);
+            }
+        });
     }
 
     public void inicializarComponentes(){
         this.resumoData = findViewById(R.id.resumo_data);
         this.resumoHorario = findViewById(R.id.resumo_horario);
         this.resumoSala = findViewById(R.id.resumo_sala);
+        this.btnConfirmarReserva = findViewById(R.id.btn_confirmar_reserva);
     }
 
     public void getExtrasIntent(){

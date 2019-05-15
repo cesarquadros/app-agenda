@@ -5,11 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import model.Sala;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ninox.agenda.R;
+import com.ninox.agenda.model.Sala;
 import com.ninox.agenda.ui.onclicklistner.OnItemSalaClickListener;
 
 import java.util.List;

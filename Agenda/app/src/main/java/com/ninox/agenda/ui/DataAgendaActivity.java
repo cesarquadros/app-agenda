@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DataAgendaActivity extends AppCompatActivity {
+public class  DataAgendaActivity extends AppCompatActivity {
 
     private static final String FORMATO_DATA_APRESENTACAO = "dd/MM/yyyy";
     private static final String FORMATO_DATA_REQUISICAO = "yyyy-MM-dd";
@@ -54,5 +54,13 @@ public class DataAgendaActivity extends AppCompatActivity {
         calendar.set(Calendar.YEAR, year);
         view.setDate(calendar.getTimeInMillis());
         return view;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (getIntent().getBooleanExtra("EXIT", false)) {
+            finish();
+        }
     }
 }

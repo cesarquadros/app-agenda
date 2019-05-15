@@ -1,4 +1,4 @@
-package model;
+package com.ninox.agenda.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,5 +43,14 @@ public class Sala {
         salas.add(new Sala("Sala 2", "Uma duas, duas cadeiras"));
         salas.add(new Sala("Sala 3", "Uma tres, tres cadeiras"));
         salas.add(new Sala("Sala 4", "Uma quatro, quatro cadeiras"));
+    }
+
+    @Override
+    public String toString() {
+        return "Sala{" +
+                "nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", salas=" + salas +
+                '}';
     }
 }

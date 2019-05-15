@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ninox.agenda">
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/login"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/login"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ResumoAgendamentoActivity"></activity>
+        <activity android:name=".ui.MeusAgendamentosActivity"></activity>
+        <activity android:name=".ui.ResumoAgendamentoActivity" />
         <activity android:name=".ui.ListaHorarioActivity" />
         <activity android:name=".ui.ListaSalasActivity" />
         <activity android:name=".ui.DataAgendaActivity" />

@@ -101,8 +101,9 @@
         </androidx.cardview.widget.CardView>
 
         <Button
+            android:id="@+id/btn_confirmar_reserva"
             android:layout_marginTop="10dp"
-            android:text="Realizar agendamento"
+            android:text="Confirmar reserva"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="#673AB7"
