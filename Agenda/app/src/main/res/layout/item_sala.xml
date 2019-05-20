@@ -14,7 +14,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="8dp">
-
+Sala
         <TextView
             android:id="@+id/sala_nome"
             android:layout_width="match_parent"

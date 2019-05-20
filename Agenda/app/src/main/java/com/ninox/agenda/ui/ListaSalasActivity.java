@@ -54,6 +54,9 @@ public class ListaSalasActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Sala>> call, Response<List<Sala>> response) {
                 salas = response.body();
+
+                Log.e("SalaService", "Quantidade de SALAS: " + salas.size());
+
                 initializeRecycle();
             }
 

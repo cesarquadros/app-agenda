@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface SalaService {
 
-    @GET("salas")
+    @GET("/salas")
     Call<List<Sala>> buscarSalas();
 
 }

@@ -1,17 +1,17 @@
 package com.ninox.agenda.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
+
+@JsonIgnoreProperties({"unidade"})
 public class Sala {
 
+    private String id;
     private String nome;
     private String descricao;
-    private List<Sala> salas;
-
-    public List<Sala> getSalas(){
-        return this.salas;
-    }
 
     public Sala() {
     }
@@ -37,20 +37,19 @@ public class Sala {
         this.descricao = descricao;
     }
 
-    public void inicializar(){
-        salas = new ArrayList<>();
-        salas.add(new Sala("Sala 1", "Uma mesa, uma cadeiras"));
-        salas.add(new Sala("Sala 2", "Uma duas, duas cadeiras"));
-        salas.add(new Sala("Sala 3", "Uma tres, tres cadeiras"));
-        salas.add(new Sala("Sala 4", "Uma quatro, quatro cadeiras"));
+    public String getId() {
+        return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
     @Override
     public String toString() {
         return "Sala{" +
-                "nome='" + nome + '\'' +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", salas=" + salas +
                 '}';
     }
 }
