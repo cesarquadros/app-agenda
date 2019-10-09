@@ -10,7 +10,7 @@ import retrofit2.http.GET;
 
 public interface HorarioService {
 
-    @GET("/horario")
+    @GET("/v2/5d9d42843100005b0050e1ab")
     Call<List<Horario>> buscarHorarios();
 
 }
