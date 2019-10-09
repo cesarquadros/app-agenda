@@ -6,16 +6,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
 import com.ninox.agenda.model.Horario;
+import com.ninox.agenda.retrofit.RetrofitHoraConfig;
 import com.ninox.agenda.ui.onclicklistner.OnItemHorarioClickListener;
 import com.ninox.agenda.ui.recycle.RecycleHorariosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ListaHorarioActivity extends AppCompatActivity {
 
@@ -26,6 +32,7 @@ public class ListaHorarioActivity extends AppCompatActivity {
     private String data;
     private String descricao;
 
+    private List<Horario> horarios;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +41,8 @@ public class ListaHorarioActivity extends AppCompatActivity {
         inicializarComponents();
         setTitle("Agendamento - Horário");
 
-        List<Horario> horarios = new ArrayList<>();
-        horarios.add(new Horario("08:00"));
+        horarios = new ArrayList<>();
+        /*horarios.add(new Horario("08:00"));
         horarios.add(new Horario("09:00"));
         horarios.add(new Horario("10:00"));
         horarios.add(new Horario("11:00"));
@@ -47,8 +54,29 @@ public class ListaHorarioActivity extends AppCompatActivity {
         horarios.add(new Horario("17:00"));
         horarios.add(new Horario("18:00"));
         horarios.add(new Horario("19:00"));
-        horarios.add(new Horario("20:00"));
+        horarios.add(new Horario("20:00"));*/
 
+
+        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios();
+
+        retHorario.enqueue(new Callback<List<Horario>>() {
+            @Override
+            public void onResponse(Call<List<Horario>> call, Response<List<Horario>> response) {
+                horarios = response.body();
+                initializeRecycle();
+            }
+
+            @Override
+            public void onFailure(Call<List<Horario>> call, Throwable t) {
+                Log.e("SalaService", "ERRO: "+ t.getMessage());
+                Toast.makeText(ListaHorarioActivity.this, "ERRO: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+    }
+
+    public void initializeRecycle(){
         RecyclerView rv = findViewById(R.id.recycle_view_horario);
 
         RecycleHorariosAdapter recycleHorariosAdapter = new RecycleHorariosAdapter(horarios, this);

@@ -11,7 +11,7 @@ public class RetrofitSalaConfig {
 
     public RetrofitSalaConfig() {
         this.retrofitSala = new Retrofit.Builder()
-                .baseUrl("http://35.231.205.196:8083")
+                .baseUrl("http://www.mocky.io")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
     }
