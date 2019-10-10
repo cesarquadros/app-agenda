@@ -1,6 +1,5 @@
 package com.ninox.agenda.ui;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,17 +41,25 @@ public class ListaSalasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_lista_salas);
         setTitle("Agendamento - Sala");
 
-//        Sala sala = new Sala();
-  //      sala.inicializar();
         salas = new ArrayList<>();
-
         context = this;
 
-        Call<List<Sala>> retSala = new RetrofitSalaConfig().getSalaService().buscarSalas();
+        Call<List<Sala>> retSala = new RetrofitSalaConfig().getSalaService().buscarSalas(MainActivity.TOKEN);
         retSala.enqueue(new Callback<List<Sala>>() {
             @Override
             public void onResponse(Call<List<Sala>> call, Response<List<Sala>> response) {
                 salas = response.body();
+
+                int code = response.code();
+
+                if(code == 401){
+                    Toast.makeText(ListaSalasActivity.this, "Efetue o LOGIN", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(ListaSalasActivity.this, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.putExtra("EXIT", true);
+                    startActivity(intent);
+                    return;
+                }
 
                 Log.e("SalaService", "Quantidade de SALAS: " + salas.size());
 

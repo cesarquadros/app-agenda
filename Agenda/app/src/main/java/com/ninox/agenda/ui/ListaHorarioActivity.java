@@ -57,7 +57,7 @@ public class ListaHorarioActivity extends AppCompatActivity {
         horarios.add(new Horario("20:00"));*/
 
 
-        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios();
+        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN);
 
         retHorario.enqueue(new Callback<List<Horario>>() {
             @Override

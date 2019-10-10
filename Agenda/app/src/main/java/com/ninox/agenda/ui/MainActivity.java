@@ -1,11 +1,8 @@
 package com.ninox.agenda.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextUser;
     private EditText editTextPass;
     private Button btnLogin;
+    public static String TOKEN;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,15 +37,9 @@ public class MainActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-
                 user = editTextUser.getText().toString();
                 pass = editTextPass.getText().toString();
-
-                String token = autenticacao(user, pass);
-
-                Intent intentVaiProFormulario = new Intent(MainActivity.this, MeusAgendamentosActivity.class);
-                startActivity(intentVaiProFormulario);
-                Toast.makeText(MainActivity.this, "Usuario Logado", Toast.LENGTH_SHORT).show();
+                autenticacao(user, pass);
             }
         });
     }
@@ -60,11 +53,24 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<Token> call, Response<Token> response) {
                 Log.e("Login", "TOKEN: " + response.body());
                 Log.e("Login", "STATUS CODE: " + response.code());
+
+                if(response.code() == 200){
+                    Token token = response.body();
+                    TOKEN = token.getUuidKey();
+                    Intent intentVaiProFormulario = new Intent(MainActivity.this, MeusAgendamentosActivity.class);
+                    startActivity(intentVaiProFormulario);
+                    Toast.makeText(MainActivity.this, "Usuario Logado", Toast.LENGTH_SHORT).show();
+                } else if (response.code() == 401) {
+                    Toast.makeText(MainActivity.this, "Usuario ou senha invalidos", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Ops! Ocorreu um erro ao efetuar o login", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<Token> call, Throwable t) {
                 Log.e("Login", "ERRROOOOOOOOOOOOOOOOOOOOOU: " + t.getMessage());
+                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

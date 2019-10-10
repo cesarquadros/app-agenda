@@ -7,10 +7,11 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 
 public interface HorarioService {
 
-    @GET("/v2/5d9d42843100005b0050e1ab")
-    Call<List<Horario>> buscarHorarios();
+    @GET("/api/ms-horario")
+    Call<List<Horario>> buscarHorarios(@Header("token") String token);
 
 }
