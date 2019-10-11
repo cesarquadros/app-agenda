@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 
 public interface HorarioService {
 
-    @GET("/api/ms-agedanmento/agendamento/horarios-disponiveis")
+    @GET("/api/ms-agendamento/agendamento/horarios-disponiveis")
     Call<List<Horario>> buscarHorarios(@Header("token") String token, @Query("data") String data, @Query("idSala")String idSala);
 
 }

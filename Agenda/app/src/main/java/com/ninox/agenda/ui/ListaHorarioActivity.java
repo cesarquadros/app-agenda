@@ -41,30 +41,31 @@ public class ListaHorarioActivity extends AppCompatActivity {
         inicializarComponents();
         setTitle("Agendamento - Horário");
 
-        horarios = new ArrayList<>();
-        horarios.add(new Horario("08:00"));
-        horarios.add(new Horario("09:00"));
-        horarios.add(new Horario("10:00"));
-        horarios.add(new Horario("11:00"));
-        horarios.add(new Horario("12:00"));
-        horarios.add(new Horario("13:00"));
-        horarios.add(new Horario("14:00"));
-        horarios.add(new Horario("15:00"));
-        horarios.add(new Horario("16:00"));
-        horarios.add(new Horario("17:00"));
-        horarios.add(new Horario("18:00"));
-        horarios.add(new Horario("19:00"));
-        horarios.add(new Horario("20:00"));
-        initializeRecycle();
 
-        //Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN,"2019-10-'10","1" );
+        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN,"2019-10-10","1" );
 
-        /*retHorario.enqueue(new Callback<List<Horario>>() {
+        retHorario.enqueue(new Callback<List<Horario>>() {
             @Override
             public void onResponse(Call<List<Horario>> call, Response<List<Horario>> response) {
                 horarios = response.body();
 
                 if(horarios != null){
+                    initializeRecycle();
+                } else {
+                    horarios = new ArrayList<>();
+                    horarios.add(new Horario("08:00"));
+                    horarios.add(new Horario("09:00"));
+                    horarios.add(new Horario("10:00"));
+                    horarios.add(new Horario("11:00"));
+                    horarios.add(new Horario("12:00"));
+                    horarios.add(new Horario("13:00"));
+                    horarios.add(new Horario("14:00"));
+                    horarios.add(new Horario("15:00"));
+                    horarios.add(new Horario("16:00"));
+                    horarios.add(new Horario("17:00"));
+                    horarios.add(new Horario("18:00"));
+                    horarios.add(new Horario("19:00"));
+                    horarios.add(new Horario("20:00"));
                     initializeRecycle();
                 }
 
@@ -75,7 +76,7 @@ public class ListaHorarioActivity extends AppCompatActivity {
                 Log.e("SalaService", "ERRO: "+ t.getMessage());
                 Toast.makeText(ListaHorarioActivity.this, "ERRO: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });*/
+        });
 
 
     }
