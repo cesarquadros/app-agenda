@@ -11,7 +11,7 @@ public class RetrofitHoraConfig {
 
     public RetrofitHoraConfig() {
         this.retrogitHora = new Retrofit.Builder()
-                .baseUrl("http://www.mocky.io")
+                .baseUrl("http://104.197.95.182:9091")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
     }

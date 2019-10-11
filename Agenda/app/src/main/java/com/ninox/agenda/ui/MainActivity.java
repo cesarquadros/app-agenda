@@ -2,6 +2,7 @@ package com.ninox.agenda.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,18 +15,21 @@ import com.ninox.agenda.R;
 import com.ninox.agenda.model.Token;
 import com.ninox.agenda.retrofit.RetrofitLoginConfig;
 
+import java.io.Serializable;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String user;
-    private String pass;
+    public String user;
+    public String pass;
     private EditText editTextUser;
     private EditText editTextPass;
     private Button btnLogin;
     public static String TOKEN;
+    private final String NOME_PREFERENCE = "INFORMACOES_LOGIN_AUTOMATICO";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         setTitle("Agendamento - Login");
         initComponents();
+        getPrefs();
+
+        editTextUser.setText(user);
+        editTextPass.setText(pass);
+
+        if(user != null && pass != null){
+            autenticacao(user, pass);
+        }
 
         btnLogin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -57,9 +69,9 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code() == 200){
                     Token token = response.body();
                     TOKEN = token.getUuidKey();
-                    Intent intentVaiProFormulario = new Intent(MainActivity.this, MeusAgendamentosActivity.class);
-                    startActivity(intentVaiProFormulario);
-                    Toast.makeText(MainActivity.this, "Usuario Logado", Toast.LENGTH_SHORT).show();
+                    setPref();
+                    goToAgendamentos(token);
+
                 } else if (response.code() == 401) {
                     Toast.makeText(MainActivity.this, "Usuario ou senha invalidos", Toast.LENGTH_SHORT).show();
                 } else {
@@ -73,8 +85,26 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-
         return null;
+    }
+
+    public void goToAgendamentos(Token token){
+        Intent intent = new Intent(MainActivity.this, MeusAgendamentosActivity.class);
+        startActivity(intent);
+        Toast.makeText(MainActivity.this, "Usuario Logado", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setPref(){
+        SharedPreferences.Editor editor = getSharedPreferences(NOME_PREFERENCE, MODE_PRIVATE).edit();
+        editor.putString("user", user);
+        editor.putString("pass", pass);
+        editor.commit();
+    }
+
+    public void getPrefs(){
+        SharedPreferences prefs = getSharedPreferences(NOME_PREFERENCE, MODE_PRIVATE);
+        user = prefs.getString("user", null);
+        pass = prefs.getString("pass", null);
     }
 
 

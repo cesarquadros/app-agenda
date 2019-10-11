@@ -1,9 +1,6 @@
 package com.ninox.agenda.service;
 
-import com.ninox.agenda.model.Login;
 import com.ninox.agenda.model.Token;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

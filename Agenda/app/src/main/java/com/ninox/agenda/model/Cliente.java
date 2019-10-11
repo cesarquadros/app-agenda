@@ -13,7 +13,7 @@ public class Cliente {
     private String email;
     private String sexo;
     private Date dataNascimento;
-    //private Autenticacao autenticacao;
+    private Autenticacao autenticacao;
 
     public String getId() {
         return id;
@@ -85,5 +85,13 @@ public class Cliente {
 
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
+    }
+
+    public Autenticacao getAutenticacao() {
+        return autenticacao;
+    }
+
+    public void setAutenticacao(Autenticacao autenticacao) {
+        this.autenticacao = autenticacao;
     }
 }

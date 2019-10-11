@@ -42,7 +42,7 @@ public class ListaHorarioActivity extends AppCompatActivity {
         setTitle("Agendamento - Horário");
 
         horarios = new ArrayList<>();
-        /*horarios.add(new Horario("08:00"));
+        horarios.add(new Horario("08:00"));
         horarios.add(new Horario("09:00"));
         horarios.add(new Horario("10:00"));
         horarios.add(new Horario("11:00"));
@@ -54,16 +54,20 @@ public class ListaHorarioActivity extends AppCompatActivity {
         horarios.add(new Horario("17:00"));
         horarios.add(new Horario("18:00"));
         horarios.add(new Horario("19:00"));
-        horarios.add(new Horario("20:00"));*/
+        horarios.add(new Horario("20:00"));
+        initializeRecycle();
 
+        //Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN,"2019-10-'10","1" );
 
-        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN);
-
-        retHorario.enqueue(new Callback<List<Horario>>() {
+        /*retHorario.enqueue(new Callback<List<Horario>>() {
             @Override
             public void onResponse(Call<List<Horario>> call, Response<List<Horario>> response) {
                 horarios = response.body();
-                initializeRecycle();
+
+                if(horarios != null){
+                    initializeRecycle();
+                }
+
             }
 
             @Override
@@ -71,7 +75,7 @@ public class ListaHorarioActivity extends AppCompatActivity {
                 Log.e("SalaService", "ERRO: "+ t.getMessage());
                 Toast.makeText(ListaHorarioActivity.this, "ERRO: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
-        });
+        });*/
 
 
     }
@@ -101,7 +105,6 @@ public class ListaHorarioActivity extends AppCompatActivity {
     private void inicializarComponents(){
         this.horarioSala = findViewById(R.id.horarios_sala_selecionada);
         this.horarioData = findViewById(R.id.horarios_data_selecionada);
-
         this.horarioData.setText(this.data);
         this.horarioSala.setText(this.sala + " - " + this.descricao);
     }

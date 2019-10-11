@@ -1,6 +1,6 @@
 package com.ninox.agenda.model;
 
-public class Login {
+public class Autenticacao {
 
     private String user;
     private String pass;
