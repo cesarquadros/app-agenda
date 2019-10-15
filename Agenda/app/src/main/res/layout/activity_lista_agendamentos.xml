@@ -6,8 +6,18 @@
     android:padding="16dp"
     android:orientation="vertical">
 
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:text="Meus Agendamentos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycle_view_sala"
+        android:id="@+id/recycle_view_agendamentos"
         android:layout_width="match_parent"
         android:layout_height="534dp"
         tools:listitem="@layout/item_agendamento" />
@@ -26,4 +36,5 @@
         android:layout_marginRight="16dp"
         android:background="@drawable/fundo"
         android:stateListAnimator="@null"/>
+
 </LinearLayout>

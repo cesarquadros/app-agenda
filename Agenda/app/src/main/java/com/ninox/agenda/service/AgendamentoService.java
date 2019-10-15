@@ -1,5 +1,6 @@
 package com.ninox.agenda.service;
 
+import com.ninox.agenda.model.Agendamento;
 import com.ninox.agenda.model.AgendamentoDTO;
 
 import retrofit2.Call;
@@ -13,6 +14,6 @@ import retrofit2.http.Query;
 public interface AgendamentoService {
 
     @POST("/api/ms-agendamento/agendamento")
-    Call<Void> agendar(@Header("token") String token, @Body AgendamentoDTO agendamentoDTO);
+    Call<Agendamento> agendar(@Header("token") String token, @Body AgendamentoDTO agendamentoDTO);
 
 }

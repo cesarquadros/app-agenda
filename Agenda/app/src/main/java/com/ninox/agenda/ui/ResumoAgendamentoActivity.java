@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
+import com.ninox.agenda.model.Agendamento;
 import com.ninox.agenda.model.AgendamentoDTO;
 import com.ninox.agenda.model.Sala;
 import com.ninox.agenda.retrofit.RetrofitAgendamentoConfig;
@@ -44,16 +45,16 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Call<Void> agendar = new RetrofitAgendamentoConfig().agendamento().agendar(MainActivity.TOKEN, agendamentoDTO);
-                agendar.enqueue(new Callback<Void>() {
+                Call<Agendamento> agendar = new RetrofitAgendamentoConfig().agendamento().agendar(MainActivity.TOKEN, agendamentoDTO);
+                agendar.enqueue(new Callback<Agendamento>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Agendamento> call, Response<Agendamento> response) {
                         Log.e("Agendar", "Retorno Agendamento: " + response.body());
                         Toast.makeText(ResumoAgendamentoActivity.this, "Agendamento Realizado com sucesso!!", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
+                    public void onFailure(Call<Agendamento> call, Throwable t) {
                         Log.e("Agendar", "Quantidade de SALAS: " + t.getMessage());
                     }
                 });

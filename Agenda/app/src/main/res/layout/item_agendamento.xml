@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:padding="8dp">
         <TextView
-            android:id="@+id/sala_nome"
+            android:id="@+id/sala_agendamento"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="30sp"
@@ -26,16 +26,16 @@
             tools:text="Sala"/>
 
         <TextView
-            android:id="@+id/sala_descricao"
+            android:id="@+id/data_agendamento"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/sala_nome"
-            app:layout_constraintTop_toBottomOf="@id/sala_nome"
-            tools:text="Sala"/>
+            app:layout_constraintStart_toStartOf="@+id/sala_agendamento"
+            app:layout_constraintTop_toBottomOf="@id/sala_agendamento"
+            tools:text="Data"/>
 
     </LinearLayout>
 

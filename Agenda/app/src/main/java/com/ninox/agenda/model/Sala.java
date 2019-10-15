@@ -3,8 +3,6 @@ package com.ninox.agenda.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 
 @JsonIgnoreProperties({"unidade"})
@@ -42,9 +40,10 @@ public class Sala implements Serializable {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(String idSala) {
+        this.id = idSala;
     }
+
     @Override
     public String toString() {
         return "Sala{" +

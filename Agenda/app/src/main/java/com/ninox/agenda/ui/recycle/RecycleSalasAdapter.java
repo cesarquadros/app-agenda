@@ -43,7 +43,6 @@ public class RecycleSalasAdapter extends RecyclerView.Adapter<RecycleSalasAdapte
 
     @Override
     public void onBindViewHolder(RecycleSalasAdapter.SalaViewHolder salaViewHolder, int i) {
-
         Sala s = salas.get(i);
         salaViewHolder.vincula(s);
     }
