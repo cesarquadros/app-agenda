@@ -1,8 +1,9 @@
 package com.ninox.agenda.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Cliente {
+public class Cliente implements Serializable {
 
     private String id;
     private String nome;

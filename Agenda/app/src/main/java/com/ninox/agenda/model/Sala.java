@@ -2,12 +2,13 @@ package com.ninox.agenda.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @JsonIgnoreProperties({"unidade"})
-public class Sala {
+public class Sala implements Serializable {
 
     private String id;
     private String nome;

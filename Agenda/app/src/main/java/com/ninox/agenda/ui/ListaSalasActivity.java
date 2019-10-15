@@ -14,12 +14,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
+import com.ninox.agenda.model.AgendamentoDTO;
 import com.ninox.agenda.model.Sala;
 import com.ninox.agenda.retrofit.RetrofitSalaConfig;
 import com.ninox.agenda.ui.onclicklistner.OnItemSalaClickListener;
 import com.ninox.agenda.ui.recycle.RecycleSalasAdapter;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -48,8 +52,6 @@ public class ListaSalasActivity extends AppCompatActivity {
         retSala.enqueue(new Callback<List<Sala>>() {
             @Override
             public void onResponse(Call<List<Sala>> call, Response<List<Sala>> response) {
-                salas = response.body();
-
                 int code = response.code();
 
                 if(code == 401){
@@ -60,9 +62,8 @@ public class ListaSalasActivity extends AppCompatActivity {
                     startActivity(intent);
                     return;
                 }
-
+                salas = response.body();
                 Log.e("SalaService", "Quantidade de SALAS: " + salas.size());
-
                 initializeRecycle();
             }
 
@@ -98,11 +99,38 @@ public class ListaSalasActivity extends AppCompatActivity {
             @Override
             public void onItemClick(Sala sala, int posicao) {
                 Intent intentGotToHorario = new Intent(ListaSalasActivity.this, ListaHorarioActivity.class);
-                intentGotToHorario.putExtra("sala", sala.getNome());
                 intentGotToHorario.putExtra("descricao", sala.getDescricao());
-                intentGotToHorario.putExtra("data", dateSelected);
+                intentGotToHorario.putExtra("dataExibicao", dateSelected);
+
+
+                AgendamentoDTO agendamento = new AgendamentoDTO();
+                agendamento.setCpfCliente(MainActivity.CLIENTE.getCpf());
+                agendamento.setDataAgendamento(stringToDate(dateSelected));
+                agendamento.setIdSala(sala.getId());
+                agendamento.setStatus(AgendamentoDTO.Status.ABERTO);
+
+                //objeto implementa Serialize para
+                intentGotToHorario.putExtra("AgendamentoDTO", agendamento);
+                intentGotToHorario.putExtra("Sala", sala);
+
                 startActivity(intentGotToHorario);
             }
         });
+    }
+
+    public String stringToDate(String dataStr){
+        try {
+            SimpleDateFormat simpleDateFormatView = new SimpleDateFormat("dd/MM/yyyy");
+            SimpleDateFormat simpleDateFormatReq = new SimpleDateFormat("yyyy-MM-dd");
+
+            Date date = simpleDateFormatView.parse(dateSelected);
+
+            String dateStrReq = simpleDateFormatReq.format(date);
+
+            return dateStrReq;
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

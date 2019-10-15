@@ -1,6 +1,8 @@
 package com.ninox.agenda.model;
 
-public class Autenticacao {
+import java.io.Serializable;
+
+public class Autenticacao implements Serializable {
 
     private String user;
     private String pass;

@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
+import com.ninox.agenda.model.Cliente;
 import com.ninox.agenda.model.Token;
 import com.ninox.agenda.retrofit.RetrofitLoginConfig;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextPass;
     private Button btnLogin;
     public static String TOKEN;
+    public static Cliente CLIENTE;
     private final String NOME_PREFERENCE = "INFORMACOES_LOGIN_AUTOMATICO";
 
     @Override
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 if(response.code() == 200){
                     Token token = response.body();
                     TOKEN = token.getUuidKey();
+                    CLIENTE = token.getCliente();
                     setPref();
                     goToAgendamentos(token);
 

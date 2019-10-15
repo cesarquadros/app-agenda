@@ -4,12 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
+import com.ninox.agenda.model.AgendamentoDTO;
+import com.ninox.agenda.model.Sala;
+import com.ninox.agenda.retrofit.RetrofitAgendamentoConfig;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ResumoAgendamentoActivity extends AppCompatActivity {
 
@@ -17,11 +25,11 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
     private TextView resumoHorario;
     private TextView resumoData;
     private Button btnConfirmarReserva;
-
-    private String sala;
-    private String horario;
     private String data;
-    private String descricao;
+
+    private Sala sala;
+
+    private AgendamentoDTO agendamentoDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,21 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
         this.btnConfirmarReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Call<Void> agendar = new RetrofitAgendamentoConfig().agendamento().agendar(MainActivity.TOKEN, agendamentoDTO);
+                agendar.enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        Log.e("Agendar", "Retorno Agendamento: " + response.body());
+                        Toast.makeText(ResumoAgendamentoActivity.this, "Agendamento Realizado com sucesso!!", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.e("Agendar", "Quantidade de SALAS: " + t.getMessage());
+                    }
+                });
+
                 Intent intent = new Intent(getApplicationContext(), DataAgendaActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("EXIT", true);
@@ -52,15 +75,14 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
 
     public void getExtrasIntent(){
         Intent intent = getIntent();
-        this.sala = intent.getStringExtra("sala");
-        this.horario = intent.getStringExtra("horario");
-        this.data = intent.getStringExtra("data");
-        this.descricao = intent.getStringExtra("descricao");
+        this.data = intent.getStringExtra("dataExibicao");
+        this.agendamentoDTO = (AgendamentoDTO) getIntent().getSerializableExtra("AgendamentoDTO");
+        this.sala = (Sala) getIntent().getSerializableExtra("Sala");
     }
 
     private void setDadosComponents() {
         this.resumoData.setText("Data: " + this.data);
-        this.resumoHorario.setText("Horario: " + this.horario);
-        this.resumoSala.setText(this.sala + " - " + descricao);
+        this.resumoHorario.setText("Horario: " + this.agendamentoDTO.getHora());
+        this.resumoSala.setText(this.sala.getNome() + " - " + this.sala.getDescricao());
     }
 }

@@ -1,10 +1,39 @@
 package com.ninox.agenda.model;
 
-public class AgendamentoDTO {
+import java.io.Serializable;
+import java.util.Date;
 
+public class AgendamentoDTO implements Serializable {
+
+    private String cpfCliente;
+    private String dataAgendamento;
+    private Status status;
     private String hora;
     private String idSala;
-    private String cpfCliente;
+
+    public String getCpfCliente() {
+        return cpfCliente;
+    }
+
+    public void setCpfCliente(String cpfCliente) {
+        this.cpfCliente = cpfCliente;
+    }
+
+    public String getDataAgendamento() {
+        return dataAgendamento;
+    }
+
+    public void setDataAgendamento(String dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
+    }
+
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
 
     public String getHora() {
         return hora;
@@ -22,11 +51,5 @@ public class AgendamentoDTO {
         this.idSala = idSala;
     }
 
-    public String getCpfCliente() {
-        return cpfCliente;
-    }
-
-    public void setCpfCliente(String cpfCliente) {
-        this.cpfCliente = cpfCliente;
-    }
+    public enum Status {ABERTO,FINALIZADO,CANCELADO}
 }
