@@ -44,25 +44,7 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
         this.btnConfirmarReserva.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Call<Agendamento> agendar = new RetrofitAgendamentoConfig().agendamento().agendar(MainActivity.TOKEN, agendamentoDTO);
-                agendar.enqueue(new Callback<Agendamento>() {
-                    @Override
-                    public void onResponse(Call<Agendamento> call, Response<Agendamento> response) {
-                        Log.e("Agendar", "Retorno Agendamento: " + response.body());
-                        Toast.makeText(ResumoAgendamentoActivity.this, "Agendamento Realizado com sucesso!!", Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onFailure(Call<Agendamento> call, Throwable t) {
-                        Log.e("Agendar", "Quantidade de SALAS: " + t.getMessage());
-                    }
-                });
-
-                Intent intent = new Intent(getApplicationContext(), DataAgendaActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtra("EXIT", true);
-                startActivity(intent);
+                requisicaoEfetuarAgendamento();
             }
         });
     }
@@ -85,5 +67,24 @@ public class ResumoAgendamentoActivity extends AppCompatActivity {
         this.resumoData.setText("Data: " + this.data);
         this.resumoHorario.setText("Horario: " + this.agendamentoDTO.getHora());
         this.resumoSala.setText(this.sala.getNome() + " - " + this.sala.getDescricao());
+    }
+
+    public void requisicaoEfetuarAgendamento(){
+        Call<Agendamento> agendar = new RetrofitAgendamentoConfig().agendamento().agendar(MainActivity.TOKEN, agendamentoDTO);
+        agendar.enqueue(new Callback<Agendamento>() {
+            @Override
+            public void onResponse(Call<Agendamento> call, Response<Agendamento> response) {
+                Log.e("Agendar", "Retorno Agendamento: " + response.body());
+                Toast.makeText(ResumoAgendamentoActivity.this, "Agendamento Realizado com sucesso!!", Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void onFailure(Call<Agendamento> call, Throwable t) {
+                Log.e("Agendar", "Quantidade de SALAS: " + t.getMessage());
+            }
+        });
+        Intent intent = new Intent(getApplicationContext(), DataAgendaActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
     }
 }

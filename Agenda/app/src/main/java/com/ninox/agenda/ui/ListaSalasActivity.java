@@ -102,11 +102,10 @@ public class ListaSalasActivity extends AppCompatActivity {
                 intentGotToHorario.putExtra("descricao", sala.getDescricao());
                 intentGotToHorario.putExtra("dataExibicao", dateSelected);
 
-
                 AgendamentoDTO agendamento = new AgendamentoDTO();
                 agendamento.setCpfCliente(MainActivity.CLIENTE.getCpf());
                 agendamento.setDataAgendamento(stringToDate(dateSelected));
-                agendamento.setIdSala(sala.getId());
+                agendamento.setIdSala(sala.getIdSala());
                 agendamento.setStatus(AgendamentoDTO.Status.ABERTO);
 
                 //objeto implementa Serialize para

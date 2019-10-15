@@ -26,7 +26,7 @@ public class  DataAgendaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_agenda);
         setTitle("Agendamento - Data"); //---- Alterar titulo da Activity
 
-        Intent dadosRecebidos = getIntent();
+        //Intent dadosRecebidos = getIntent();
 
         final CalendarView calendarView = findViewById(R.id.calendario);
 

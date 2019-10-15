@@ -8,15 +8,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ninox.agenda.R;
 import com.ninox.agenda.model.Cliente;
 import com.ninox.agenda.model.Token;
 import com.ninox.agenda.retrofit.RetrofitLoginConfig;
-
-import java.io.Serializable;
 
 import retrofit2.Call;
 import retrofit2.Callback;

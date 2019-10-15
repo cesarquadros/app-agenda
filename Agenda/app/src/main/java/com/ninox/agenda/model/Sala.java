@@ -8,7 +8,7 @@ import java.io.Serializable;
 @JsonIgnoreProperties({"unidade"})
 public class Sala implements Serializable {
 
-    private String id;
+    private String idSala;
     private String nome;
     private String descricao;
 
@@ -36,18 +36,18 @@ public class Sala implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getId() {
-        return id;
+    public String getIdSala() {
+        return idSala;
     }
 
-    public void setId(String idSala) {
-        this.id = idSala;
+    public void setIdSala(String idSala) {
+        this.idSala = idSala;
     }
 
     @Override
     public String toString() {
         return "Sala{" +
-                "id='" + id + '\'' +
+                "id='" + idSala + '\'' +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
                 '}';

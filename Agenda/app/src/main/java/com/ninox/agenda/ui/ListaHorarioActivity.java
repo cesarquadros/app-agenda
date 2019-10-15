@@ -45,13 +45,14 @@ public class ListaHorarioActivity extends AppCompatActivity {
         inicializarComponents();
         setTitle("Agendamento - Horário");
 
-        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN,this.agendamentoDTO.getDataAgendamento(),"1" );
+    }
 
+    public void req(){
+        Call<List<Horario>> retHorario = new RetrofitHoraConfig().getHorarioService().buscarHorarios(MainActivity.TOKEN,this.agendamentoDTO.getDataAgendamento(),"1" );
         retHorario.enqueue(new Callback<List<Horario>>() {
             @Override
             public void onResponse(Call<List<Horario>> call, Response<List<Horario>> response) {
                 horarios = response.body();
-
                 if(horarios != null){
                     initializeRecycle();
                 } else {
@@ -71,39 +72,28 @@ public class ListaHorarioActivity extends AppCompatActivity {
                     horarios.add(new Horario("20:00"));
                     initializeRecycle();
                 }
-
             }
-
             @Override
             public void onFailure(Call<List<Horario>> call, Throwable t) {
                 Log.e("SalaService", "ERRO: "+ t.getMessage());
                 Toast.makeText(ListaHorarioActivity.this, "ERRO: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
-
-
     }
 
     public void initializeRecycle(){
         RecyclerView rv = findViewById(R.id.recycle_view_horario);
-
         RecycleHorariosAdapter recycleHorariosAdapter = new RecycleHorariosAdapter(horarios, this);
         rv.setAdapter(recycleHorariosAdapter);
-
         rv.setLayoutManager(new GridLayoutManager(this,2));
-
         recycleHorariosAdapter.setOnItemHorarioClickListener(new OnItemHorarioClickListener() {
             @Override
             public void onItemClick(Horario horario, int posicao) {
-
                 Intent intentVaiParaResumo = new Intent(ListaHorarioActivity.this, ResumoAgendamentoActivity.class);
                 intentVaiParaResumo.putExtra("dataExibicao", data);
-
                 agendamentoDTO.setHora(horario.getHora());
-
                 intentVaiParaResumo.putExtra("AgendamentoDTO", agendamentoDTO);
                 intentVaiParaResumo.putExtra("Sala", sala);
-
                 startActivity(intentVaiParaResumo);
             }
         });
@@ -119,10 +109,14 @@ public class ListaHorarioActivity extends AppCompatActivity {
     private void getExtrasIntent() {
         Intent intentRecebido = getIntent();
         this.data = intentRecebido.getStringExtra("dataExibicao");
-
         this.agendamentoDTO = (AgendamentoDTO) getIntent().getSerializableExtra("AgendamentoDTO");
         this.sala = (Sala) getIntent().getSerializableExtra("Sala");
-
         Log.e("ListaHorario", "Data do agendamento ->>>>>>>>>>>>>>>>>>>" + agendamentoDTO.getDataAgendamento());
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        req();
     }
 }

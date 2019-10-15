@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,14 +53,15 @@ public class RecycleAgendamentosAdapter extends RecyclerView.Adapter<RecycleAgen
         CardView cv;
         private TextView salaAgendamento;
         private TextView dataAgendamento;
+        private TextView horarioAgendamento;
         private Agendamento agendamento;
 
         public AgendamentoViewHolder( View itemView) {
             super(itemView);
             cv = itemView.findViewById(R.id.cardView);
             this.dataAgendamento = itemView.findViewById(R.id.data_agendamento);
-            this.salaAgendamento  = itemView.findViewById(R.id.sala_agendamento);
-
+            this.salaAgendamento = itemView.findViewById(R.id.sala_agendamento);
+            this.horarioAgendamento = itemView.findViewById(R.id.horario_agendamento);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -69,15 +69,14 @@ public class RecycleAgendamentosAdapter extends RecyclerView.Adapter<RecycleAgen
                 }
             });
         }
-
         public void vincula(Agendamento agendamento){
             this.agendamento = agendamento;
             preencheCampo(agendamento);
         }
-
         private void preencheCampo(Agendamento agendamento){
             this.salaAgendamento.setText(agendamento.getSala().getNome());
-            this.dataAgendamento.setText(agendamento.getDataAgendamento().toString());
+            this.dataAgendamento.setText(agendamento.getDataAgendamento());
+            this.horarioAgendamento.setText(agendamento.getHora());
         }
     }
 
